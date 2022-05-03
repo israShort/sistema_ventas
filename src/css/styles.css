@@ -1,0 +1,111 @@
+@font-face {
+    font-family: "OpenSansRegular";
+    src: local("OpenSansRegular"), url('../fonts/OpenSans-Regular.ttf') format("truetype");
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: "OpenSansSemiBold";
+    src: local("OpenSansSemiBold"), url('../fonts/OpenSans-SemiBold.ttf') format("truetype");
+    font-weight: 600;
+}
+
+@font-face {
+    font-family: "OpenSansLight";
+    src: local("OpenSansLight"), url('../fonts/OpenSans-Light.ttf') format("truetype");
+    font-weight: 300;
+}
+
+.open-sans-regular {
+    font-family: 'OpenSansRegular';
+}
+
+.open-sans-semibold {
+    font-family: 'OpenSansSemiBold';
+}
+
+body {
+    background-color: #EEEEEE !important;
+}
+
+#col-menu {
+    color: white;
+    background: rgb(34, 34, 34);
+    background: -moz-linear-gradient(0deg, rgba(34, 34, 34, 1) 0%, rgba(65, 65, 65, 1) 100%);
+    background: -webkit-linear-gradient(0deg, rgba(34, 34, 34, 1) 0%, rgba(65, 65, 65, 1) 100%);
+    background: linear-gradient(0deg, rgba(34, 34, 34, 1) 0%, rgba(65, 65, 65, 1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#222222", endColorstr="#414141", GradientType=1);
+    border-radius: 12px;
+    height: -webkit-fill-available;
+    max-width: 13.5em;
+}
+
+.link-menu {
+    color: #6D6D6D;
+    text-decoration: none;
+    font-size: 13.5px;
+    line-height: 17px;
+    font-family: 'OpenSansRegular';
+    margin-bottom: 0.65rem;
+}
+
+.link-menu:hover {
+    color: #131313;
+}
+
+.link-menu:last-child {
+    margin-bottom: 0;
+}
+
+.body-root {
+    margin-left: 16.5rem;
+}
+
+.box-shadow-none {
+    box-shadow: none !important;
+}
+
+#login-screen, #change-password-screen {
+    background: rgb(5, 14, 85);
+    background: -moz-linear-gradient(135deg, rgba(5, 14, 85, 1) 0%, rgba(79, 122, 255, 1) 100%);
+    background: -webkit-linear-gradient(135deg, rgba(5, 14, 85, 1) 0%, rgba(79, 122, 255, 1) 100%);
+    background: linear-gradient(135deg, rgba(5, 14, 85, 1) 0%, rgba(79, 122, 255, 1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#050e55", endColorstr="#4f7aff", GradientType=1);
+}
+
+#login-screen h1, #change-password-screen h1 {
+    font-size: 26px;
+    line-height: 31px;
+    font-family: 'OpenSansSemiBold';
+}
+
+#login-screen label, #change-password-screen label {
+    font-size: 14px;
+    line-height: 18px;
+    font-family: 'OpenSansLight';
+}
+
+#login-screen .btn-primary, #change-password-screen .btn-primary {
+    font-size: 13.5px;
+    line-height: 17px;
+    font-family: 'OpenSansRegular';
+    box-shadow: none;
+}
+
+#login-screen a, .sign-up-petition, #change-password-screen a {
+    font-size: 12px;
+    line-height: 16px;
+    font-family: 'OpenSansRegular';
+    text-decoration: none;
+}
+
+#login-screen .form-control, #change-password-screen .form-control {
+    font-size: 14px;
+    line-height: 18px;
+    box-shadow: none;
+}
+
+#login-screen .form-control::placeholder, #change-password-screen .form-control::placeholder {
+    font-size: 14px;
+    line-height: 18px;
+}
