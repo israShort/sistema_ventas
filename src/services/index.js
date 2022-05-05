@@ -113,3 +113,31 @@ export async function changePassword(obj) {
         console.warn(e);
     }
 }
+
+export async function cargarGrillaClientes() {
+    try {
+        let config = {
+            method: 'GET',
+            header: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        };
+
+        let response = await fetch(`${URI}/cargar-grilla-clientes`, config);
+        let responseJson = await response.json();
+        return responseJson;
+    } catch (e) {
+        console.warn(e);
+    }
+}
+
+export async function obtenerClientePorId(id) {
+    try {
+        let response = await fetch(`${URI}/obtener-cliente?id=${id}`);
+        let responseJson = await response.json();
+        return responseJson;
+    } catch (e) {
+        console.warn(e);
+    }
+}

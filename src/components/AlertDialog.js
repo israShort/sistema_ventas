@@ -16,16 +16,16 @@ export default function AlertDialog(props) {
                 aria-describedby="alert-dialog-description"
             >
                 <DialogTitle id="alert-dialog-title">
-                    <h3>{(() => {
+                    {(() => {
                         switch (props.status) {
                             case 'danger':
-                                return 'Error';
+                                return 'Error'
                             case 'success':
-                                return 'Éxito';
+                                return 'Éxito'
                             default:
                                 return 'Info'
                         }
-                    })()}</h3>
+                    })()}
                 </DialogTitle>
                 <DialogContent>
                     <DialogContentText id="alert-dialog-description">{props.msg}</DialogContentText>

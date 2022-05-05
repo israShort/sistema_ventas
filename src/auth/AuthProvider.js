@@ -81,6 +81,56 @@ export const AuthProvider = ({ children }) => {
         }
     }
 
+    const obtenerClientePorId = async (id) => {
+        try {
+            let data = await Service.obtenerClientePorId(id);
+            if (data.code === 200) {
+                return {
+                    data: data.body,
+                    msg: data.msg,
+                    status: data.status
+                }
+            } else {
+                return {
+                    data: null,
+                    msg: data.msg,
+                    status: data.status
+                }
+            }
+        } catch (e) {
+            return {
+                data: null,
+                msg: JSON.stringify(e),
+                status: 'danger'
+            }
+        }
+    }
+
+    const getGrillaClientes = async () => {
+        try {
+            let data = await Service.cargarGrillaClientes();
+            if (data.code === 200) {
+                return {
+                    data: data.body,
+                    msg: data.msg,
+                    status: data.status
+                }
+            } else {
+                return {
+                    data: [],
+                    msg: data.msg,
+                    status: data.status
+                }
+            }
+        } catch (e) {
+            return {
+                data: [],
+                msg: JSON.stringify(e),
+                status: 'danger'
+            }
+        }
+    }
+
     useEffect(() => {
         dispatch({ status: JSON.parse(localStorage.getItem('isLoggedIn')) });
         setIdUsuario(JSON.parse(localStorage.getItem('idUsuario')));
@@ -107,6 +157,10 @@ export const AuthProvider = ({ children }) => {
                     nombre,
                     apellido,
                     email
+                },
+                globals: {
+                    obtenerClientePorId,
+                    getGrillaClientes
                 }
             }}
         >

@@ -1,7 +1,9 @@
 import { Stack, TextField } from '@mui/material';
 import { DesktopDatePicker } from '@mui/x-date-pickers';
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Breadcrumb, Col, Form, Row, Button } from 'react-bootstrap';
+import { useNavigate, useParams } from 'react-router-dom';
+import { AuthContext } from '../../auth/AuthProvider';
 import AlertDialog from '../../components/AlertDialog';
 import * as Service from '../../services';
 
@@ -17,14 +19,43 @@ export default function ClienteNuevo() {
     const [open, setOpen] = useState(false);
     const [result, setResult] = useState({ msg: '', status: '' });
 
+    const navigate = useNavigate();
+
+    const { idCliente } = useParams();
+
+    const { globals } = useContext(AuthContext);
+
+    useEffect(() => {
+        if (idCliente !== undefined) {
+            (async () => {
+                await globals.obtenerClientePorId(idCliente)
+                    .then((result) => {
+                        if (result.data !== null) {
+                            let { data } = result;
+                            setNombre(data.nombre);
+                            setApellido(data.apellido);
+                            setEmail(data.email);
+                            setDocumento(data.documento);
+                            setFNacimiento(data.fechaNacimiento);
+                        } else {
+                            setResult({ msg: result.msg, status: result.status });
+                        }
+                        setId(idCliente);
+                    });
+            })();
+        }
+    }, [idCliente]);
+
     const handleChangeFNacimiento = (e) => {
         setFNacimiento(`${e.getFullYear()}-${e.getMonth() + 1}-${e.getDate()}`);
     }
 
     const submitForm = async () => {
-        const data = await Service.guardarCliente({ id, nombre, apellido, email, documento, fNacimiento });
-        setOpen(true);
-        setResult({ msg: data.msg, status: data.status });
+        await Service.guardarCliente({ id, nombre, apellido, email, documento, fNacimiento })
+            .then((data) => {
+                setOpen(true);
+                setResult({ msg: data.msg, status: data.status });
+            });
     }
 
     return (
@@ -36,7 +67,7 @@ export default function ClienteNuevo() {
             </Breadcrumb>
 
             <Breadcrumb>
-                <Button variant='link' className='bg-transparent border-0 rounded-0 box-shadow-none ps-md-0'><i className='bi bi-plus-circle-fill me-md-2'></i>Nuevo</Button>
+                <Button variant='link' className='bg-transparent border-0 rounded-0 box-shadow-none ps-md-0' onClick={() => { navigate('/clientes/nuevo', { replace: true }) }}><i className='bi bi-plus-circle-fill me-md-2'></i>Nuevo</Button>
                 <Button variant='link' className='mx-md-3 bg-transparent border-0 rounded-0 box-shadow-none' onClick={() => submitForm()}><i className='bi bi-save-fill me-md-2'></i>Guardar</Button>
                 <Button variant='link' className='bg-transparent border-0 rounded-0 box-shadow-none'><i className='bi bi-trash-fill me-md-2'></i>Eliminar</Button>
             </Breadcrumb>
@@ -51,7 +82,8 @@ export default function ClienteNuevo() {
                                 required
                                 id='inputNombre'
                                 label='Nombre'
-                                defaultValue={nombre}
+                                value={nombre}
+                                focused={id > 0 && nombre !== '' ? true : false}
                                 type='text'
                                 onChange={(e) => setNombre(e.target.value)}
                             />
@@ -62,7 +94,8 @@ export default function ClienteNuevo() {
                             <TextField
                                 id='inputApellido'
                                 label='Apellido'
-                                defaultValue={apellido}
+                                value={apellido}
+                                focused={id > 0 && apellido !== '' ? true : false}
                                 type='text'
                                 onChange={(e) => setApellido(e.target.value)}
                             />
@@ -74,7 +107,8 @@ export default function ClienteNuevo() {
                                 required
                                 id='inputEmail'
                                 label='Email'
-                                defaultValue={email}
+                                value={email}
+                                focused={id > 0 && email !== '' ? true : false}
                                 type='email'
                                 onChange={(e) => setEmail(e.target.value)}
                             />
@@ -86,7 +120,8 @@ export default function ClienteNuevo() {
                                 required
                                 id='inputDocumento'
                                 label='Documento'
-                                defaultValue={documento}
+                                value={documento}
+                                focused={id > 0 && documento !== '' ? true : false}
                                 type='text'
                                 onChange={(e) => setDocumento(e.target.value)}
                             />
@@ -98,6 +133,7 @@ export default function ClienteNuevo() {
                                 label="Fecha de nacimiento"
                                 inputFormat="dd/MM/yyyy"
                                 value={fNacimiento}
+                                focused={id > 0 && fNacimiento !== '' ? true : false}
                                 onChange={handleChangeFNacimiento}
                                 renderInput={(params) => <TextField {...params} />}
                             />

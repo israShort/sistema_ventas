@@ -22,6 +22,7 @@ export default function Login() {
         await auth.login(email, clave)
             .then((value) => {
                 if (value.usuarioId === null) {
+                    setOpen(true);
                     setResult({ msg: value.msg, status: value.status });
                 }
             });

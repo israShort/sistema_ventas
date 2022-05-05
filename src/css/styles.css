@@ -109,3 +109,20 @@ body {
     font-size: 14px;
     line-height: 18px;
 }
+
+#section-grilla-clientes .MuiDataGrid-columnHeadersInner, #section-grilla-clientes .MuiDataGrid-columnHeader, #section-grilla-clientes .MuiDataGrid-cell, #section-grilla-clientes .MuiDataGrid-virtualScrollerRenderZone, #section-grilla-clientes .MuiDataGrid-row {
+    width: 100% !important;
+}
+
+#section-grilla-clientes .MuiDataGrid-columnHeader, #section-grilla-clientes .MuiDataGrid-cell {
+    min-width: unset !important;
+    max-width: none !important;
+}
+
+#section-grilla-clientes .MuiDataGrid-cell:last-child {
+    display: none;
+}
+
+#section-grilla-clientes .MuiDataGrid-cell:first-child .MuiDataGrid-cellContent {
+    cursor: pointer;
+}

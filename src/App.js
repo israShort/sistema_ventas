@@ -1,6 +1,6 @@
 import './App.css';
 import React, { useContext } from 'react';
-import { Navigate, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import Index from './screens';
 import Plantilla from './screens/plantilla';
 import Login from './screens/login';
@@ -11,6 +11,7 @@ import SignUp from './screens/signup';
 import User from './screens/Sistema/User';
 import { AuthContext } from './auth/AuthProvider';
 import ChangePassword from './screens/Sistema/ChangePassword';
+import ListadoClientes from './screens/clientes/ListadoClientes';
 
 function App() {
 
@@ -22,6 +23,8 @@ function App() {
         <Route path='/' element={<Plantilla />}>
           <Route index element={<Index />} />
           <Route path='clientes/nuevo' element={<ClienteNuevo />} />
+          <Route path='clientes/nuevo/:idCliente' element={<ClienteNuevo />} />
+          <Route path='clientes/listar' element={<ListadoClientes />} />
           <Route path={`account/${user.usuario}`} element={<User />} />
         </Route>
         <Route path='/login' element={<Login />} />
